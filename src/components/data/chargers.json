@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "name": "Charger 1",
+    "lat": 51.5074,
+    "lng": -0.1278,
+    "type": "Fast",
+    "status": "Available"
+  }
+]
