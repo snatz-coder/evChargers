@@ -1,5 +1,9 @@
 import React, { useState, useCallback } from "react";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import markerGreen from "../assets/marker_green.svg";
+import markerRed from "../assets/marker_red.svg";
+import markerYellow from "../assets/marker_yellow.svg";
+import markerGrey from "../assets/marker_grey.svg";
 const defaultCenter = {
   lat: 51.5074,
   lng: -0.1278,
@@ -7,10 +11,18 @@ const defaultCenter = {
 
 const containerStyle = {
   height: "400px",
-  width: "100%",
+  width: "calc(100vw - 40px)",
+  margin: "20px"
 };
 
-const Map = ({ center = defaultCenter, markers = [defaultCenter] }) => {
+const statusIcons = {
+  Available: markerGreen,
+  Faulted: markerRed,
+  Charging: markerYellow,
+  Offline: markerGrey,
+};
+
+const Map = ({ center = defaultCenter, chargers = [] }) => {
   const [map, setMap] = useState(null);
 
   const { isLoaded, loadError } = useJsApiLoader({
@@ -21,7 +33,7 @@ const Map = ({ center = defaultCenter, markers = [defaultCenter] }) => {
     setMap(mapInstance);
   }, []);
 
-  const unMount = useCallback(() => {
+  const onUnMount = useCallback(() => {
     setMap(null);
   }, []);
 
@@ -36,18 +48,24 @@ const Map = ({ center = defaultCenter, markers = [defaultCenter] }) => {
   return (
     <GoogleMap
       center={center}
-      zoom={12}
+      zoom={7}
       mapContainerStyle={containerStyle}
       onLoad={onLoad}
-      unMount={unMount}
+      onUnmount={onUnMount}
     >
-      {markers.map((marker, index) => (
+      {chargers.map((charger, index) => {
+       const markerIcon = {
+          url: statusIcons[charger.status],
+          scaledSize: new window.google.maps.Size(36, 42),
+        };
+   return(
         <Marker
           key={index}
-          position={{ lat: marker.lat, lng: marker.lng }}
-          title={marker.title}
+          position={{ lat: charger.lat, lng: charger.lng }}
+          title={`${charger.name} - ${charger.status}`}
+          icon={markerIcon}
         />
-      ))}
+)})}
     </GoogleMap>
   );
 };
