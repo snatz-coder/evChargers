@@ -23,7 +23,7 @@ const statusIcons = {
 };
 
 const Map = ({ center = defaultCenter, chargers = [] }) => {
-  const [map, setMap] = useState(null);
+  const [, setMap] = useState(null);
 
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
