@@ -7,7 +7,7 @@ import SmartTable from "./shared/SmartTable";
 const ChargersList = ({chargers}) => {
     const columns = [
         { key: "name", label: "Name" },
-        { key: "status", label: "Status" },
+        { key: "status", label: "Status", dataClass: "Chip"},
         { key: "type", label: "Type" },
         { key: "action", label: "Action", type: "action" }, 
     ];
