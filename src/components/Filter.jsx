@@ -1,4 +1,4 @@
-import React from "react";
+import Button from "@mui/material/Button";
 
 const Filter = ({ filters, setFilters }) => {
   const handleTypeChange = (e) => {
@@ -36,7 +36,10 @@ const Filter = ({ filters, setFilters }) => {
         }}
       >
         <div style={{ flex: "1", minWidth: "150px" }}>
-          <label htmlFor="type-select" style={{ display: "block", marginBottom: "4px" }}>
+          <label
+            htmlFor="type-select"
+            style={{ display: "block", marginBottom: "4px" }}
+          >
             Type
           </label>
           <select
@@ -57,7 +60,10 @@ const Filter = ({ filters, setFilters }) => {
         </div>
 
         <div style={{ flex: "1", minWidth: "150px" }}>
-          <label htmlFor="status-select" style={{ display: "block", marginBottom: "4px" }}>
+          <label
+            htmlFor="status-select"
+            style={{ display: "block", marginBottom: "4px" }}
+          >
             Status
           </label>
           <select
@@ -78,22 +84,9 @@ const Filter = ({ filters, setFilters }) => {
             <option value="Offline">Offline</option>
           </select>
         </div>
-
-        <button
-          onClick={handleReset}
-          style={{
-            padding: "10px",
-            borderRadius: "4px",
-            border: "1px solid #ccc",
-            background: "#4A90E2",
-            color:"#fff",
-            cursor: "pointer",
-            height: "42px",
-            alignSelf: "flex-end",
-          }}
-        >
+        <Button onClick={handleReset} variant="contained" color="primary" style={{marginTop:"20px"}}>
           Reset
-        </button>
+        </Button>
       </div>
     </div>
   );
